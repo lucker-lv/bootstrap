@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="plugins/bootstrap_v3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/datetimepicker/css/bootstrap-datetimepicker.min.css">
+    <style>
+    body{
+        padding: 50px 100px;
+    }
+    @media (min-width: 768px){
+        .form-inline .form-control {
+            width: 116px !important;
+            height: 34px !important;
+            border-radius: 0;
+        }
+    }
+    </style>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group input-append input-group date">
+            <input size="16" id='datetimeStart' type="text" value="" class='form-control form_datetime' readonly>
+            <span class="input-group-addon">  
+                <span class="glyphicon glyphicon-calendar"></span>  
+            </span>
+        </div>
+        <div class="form-group">
+            至
+        </div>
+        <div class="form-group input-append input-group date">
+            <input size="16" id='datetimeEnd' type="text" value="" class='form-control form_datetime' readonly>
+            <span class="input-group-addon">  
+                <span class="glyphicon glyphicon-calendar"></span>  
+            </span>
+        </div>
+    </form>
+    <script src='http://cdn.bootcss.com/jquery/1.11.0/jquery.js'></script>
+    <script src='plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'></script>
+    <script src='plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js'></script>
+    <script type="text/javascript">
+    $("#datetimeStart").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView:'month',
+        language: 'zh-CN',
+        autoclose:true
+    }).on('changeDate', function (e) {
+        $('#datetimeEnd').datetimepicker('setStartDate', e.date);
+    });
+
+    $("#datetimeEnd").datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView:'month',
+        language: 'zh-CN',
+        autoclose:true,
+        startDate: $('#datetimeStart').val()
+    }).on('changeDate', function (e) {
+        
+        $('#datetimeStart').datetimepicker('setEndDate', e.date);
+    });
+    </script>      
+</body>
+</html>
